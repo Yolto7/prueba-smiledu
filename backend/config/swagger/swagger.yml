@@ -1,0 +1,149 @@
+swagger: 2
+info:
+  title: 'APP STUDENTS BACKEND'
+  version: '1.0.0'
+  description: 'API ::Jesús Yelsin Broly:: App'
+  contact:
+    email: 'svencooof@gmail.com'
+tags:
+  - name: 'Students and Grades'
+    description: 'Api about students and grades'
+schemes:
+  - 'http'
+paths:
+  /student:
+    /list:
+      get:
+        tags:
+          - 'Student'
+        summary: 'Get all students'
+        description: 'This endpoint get all students as an object's array'
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Student'
+    /create:
+      post:
+        tags:
+          - 'Student'
+        summary: 'Register stundent'
+        description: 'This endpoint register student and return the newId of student'
+        requestBody:
+          description: Update an existent user in the store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentRegister'
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: 
+                    newId: 
+                      type: string
+                      example: '1'
+    /delete:
+      post:
+          tags:
+            - 'Student'
+          summary: 'Delete stundent'
+          description: 'This endpoint delete student and return the deletedId of student'
+          parameters:
+            name: id
+            in: path
+            description: id of the student that need to be deleted
+            required: true
+            schema:
+              type: integer
+              example: 1
+          responses:
+            '200':
+              description: Successful operation
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties: 
+                      deletedId: 
+                        type: string
+                        example: '1'
+  /grade:
+    /list:
+      get:
+        tags:
+          - 'Grade'
+        summary: 'Get all grades'
+        description: 'This endpoint get all grades as an object's array'
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Grade'
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 10
+        name: 
+          type: string
+          example: 'Joaquin Joseph'
+        fatherLastname: 
+          type: string
+          example: 'Torres'
+        motherLastname: 
+          type: string
+          example: 'Ortega'
+        grade: 
+          type: string
+          example: 'Primero SEC'
+        birthDate: 
+          type: string
+          example: '07-12-1999'
+        photoPath: 
+          type: string
+          example: 'a'
+    StudentRegister:
+      type: object
+      properties:
+        name: 
+          type: string
+          example: 'Joaquin Joseph'
+        fatherLastname: 
+          type: string
+          example: 'Torres'
+        motherLastname:
+          type: string
+          example: 'Ortega'
+        gradeId: 
+          type: integer
+          example: 11
+        birthDate: 
+          type: string
+          example: '1999-12-07'
+        photo: 
+          type: string
+          example: 'a'
+    Grade:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: '1'
+        desc_grado: 
+          type: string
+          example: '2 años'
+        nivel: 
+          type: string
+          example: 'INI'
+
